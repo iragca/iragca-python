@@ -99,3 +99,21 @@ class Color(Enum):
             cls.BLUE.value,
         ]
         return mcolors.LinearSegmentedColormap.from_list("BlWhOr", palette, N=256)
+
+    @classmethod
+    def WhRd(cls: type) -> mcolors.LinearSegmentedColormap:
+        """Get a color palette for W/R."""
+        palette: list = [
+            cls.WHITE.value,
+            cls.RED.value,
+        ]
+        return mcolors.LinearSegmentedColormap.from_list("WhRd", palette, N=256)
+
+    @classmethod
+    def WhOr(cls: type) -> mcolors.LinearSegmentedColormap:
+        """Get a color palette for W/O."""
+        palette: list = [
+            cls.WHITE.value,
+            cls.ORANGE.value,
+        ]
+        return mcolors.LinearSegmentedColormap.from_list("WhOr", palette, N=256)
