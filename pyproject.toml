@@ -1,0 +1,39 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "iragca"
+version = "0.0.1"
+description = "My custom scripts"
+authors = [{ name = "Chris Irag", email = "iragca@pm.me" }]
+
+readme = "README.md"
+classifiers = ["Programming Language :: Python :: 3"]
+dependencies = ["matplotlib>=3.10.7"]
+requires-python = "~=3.10.0"
+
+[tool.ruff]
+line-length = 99
+src = ["iragca"]
+include = ["pyproject.toml", "iragca/**/*.py"]
+
+[tool.ruff.lint]
+extend-select = ["I"] # Add import sorting
+
+[tool.ruff.lint.isort]
+known-first-party = ["iragca"]
+force-sort-within-sections = true
+
+[dependency-groups]
+dev = [
+  "ipykernel>=7.1.0",
+  "mkdocs>=1.6.1",
+  "mkdocs-material>=9.7.0",
+  "pip>=25.3",
+  "pytest>=9.0.1",
+  "ruff>=0.14.6",
+]
+
+[project.optional-dependencies]
+matplotlib = ["matplotlib"]
