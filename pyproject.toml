@@ -10,7 +10,10 @@ authors = [{ name = "Chris Irag", email = "iragca@pm.me" }]
 
 readme = "README.md"
 classifiers = ["Programming Language :: Python :: 3"]
-dependencies = ["matplotlib>=3.10.7"]
+dependencies = [
+    "matplotlib>=3.10.7",
+    "tqdm>=4.67.1",
+]
 requires-python = "~=3.10.0"
 
 [tool.ruff]
@@ -37,3 +40,4 @@ dev = [
 
 [project.optional-dependencies]
 matplotlib = ["matplotlib"]
+ml = ["tqdm"]
