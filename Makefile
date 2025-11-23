@@ -52,13 +52,15 @@ docs:
 ## Build and publish the package
 .PHONY: publish
 publish:
-    make format
-	make test
-	set -a
-	source .env
-	set +a
-	uv build --no-sources
-	uv publish
+	@make format
+	@make test
+	@bash -c ' \
+		set -a; \
+		source .env; \
+		set +a; \
+		uv build --no-sources; \
+		uv publish; \
+	'
 
 
 ## Set up Python interpreter environment
