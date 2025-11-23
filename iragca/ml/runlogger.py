@@ -9,6 +9,22 @@ class RunLogger:
     - Metric logging for arbitrary named metrics.
     - Dynamic attribute access, e.g., `logger.loss` → list of all logged loss values.
     - Optional tqdm progress bar display.
+
+    Example usage
+    -------------
+    ```python
+    from iragca.ml import RunLogger
+
+    logger = RunLogger(max_steps=100, display_progress=True)
+    for epoch in range(100):
+        # Simulate logging metrics
+        logger.log_metrics({'loss': 1.035, 'accuracy': 0.7728}, step=epoch)
+
+    print(logger.loss)                #  Access logged loss values
+    # [10.0, 9.9, 9.8, ..., 0.1]
+    print(logger.accuracy)            #  Access logged accuracy values
+    # [0.0, 0.01, 0.02, ..., 0.99]
+    ```
     """
 
     def __init__(self, max_steps: int, display_progress: bool = False):
