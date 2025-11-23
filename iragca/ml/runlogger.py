@@ -1,3 +1,4 @@
+from pydantic import Field, validate_call
 from tqdm import tqdm
 
 
@@ -27,7 +28,13 @@ class RunLogger:
     ```
     """
 
-    def __init__(self, max_steps: int, display_progress: bool = False):
+    @validate_call
+    def __init__(
+        self,
+        max_steps: int = Field(..., ge=1),
+        display_progress: bool = Field(False),
+        update_interval: int = Field(1, ge=1),
+    ):
         """
         Parameters
         ----------
@@ -35,12 +42,15 @@ class RunLogger:
             Total number of expected steps. Used for progress bar display.
         display_progress : bool, optional
             If True, a tqdm progress bar is shown during logging.
+        update_interval : int, optional
+            Frequency (in steps) to update the progress bar. Default is 1 (update every step).
         """
         self.history = {}
         self._display_progress = display_progress
         self._max_steps = max_steps
 
         if self._display_progress:
+            self._update_interval = update_interval
             self.pbar = tqdm(total=max_steps)
 
     def log_metrics(self, log_data: dict, step: int):
@@ -77,7 +87,8 @@ class RunLogger:
 
         # update progress bar
         self.pbar.update(1)
-        self.pbar.set_postfix(log_data, refresh=True)
+        if step % self._update_interval == 0:
+            self.pbar.set_postfix(log_data, refresh=True)
 
         if self.pbar.n == self._max_steps:
             self.pbar.close()

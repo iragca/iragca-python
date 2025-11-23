@@ -124,17 +124,28 @@ def test_progress_bar_updates(monkeypatch):
     mock_pbar.set_postfix.assert_called_once()
 
 
-def test_progress_bar_closes_at_max_steps(monkeypatch):
-    mock_pbar = MagicMock()
-    mock_pbar.n = 8  # One less than max_steps
+def test_progress_bar_closes_at_max_steps():
+    logger = RunLogger(max_steps=3, display_progress=True)
 
-    # Patch tqdm inside RunLogger for this test
-    monkeypatch.setattr("iragca.ml.runlogger.tqdm", lambda total: mock_pbar)
+    logger.pbar = MagicMock()
+    logger.pbar.n = 0
 
-    logger = RunLogger(max_steps=10, display_progress=True)
-    logger.log_metrics({"loss": 0.2}, 9)
-    logger.log_metrics({"loss": 0.2}, 10)  # Log at the last step
+    for step in range(3):
+        logger.pbar.n += 1
+        logger.log_metrics({"loss": 0.3}, step)
 
-    mock_pbar.update.assert_called()
-    mock_pbar.set_postfix.assert_called()
-    mock_pbar.close.assert_called_once()
+    logger.pbar.close.assert_called_once()
+    assert not logger._display_progress
+
+
+def test_update_interval():
+    logger = RunLogger(max_steps=10, display_progress=True, update_interval=2)
+
+    logger.pbar = MagicMock()
+    logger.pbar.n = 0
+
+    for step in range(5):
+        logger.pbar.n += 1
+        logger.log_metrics({"loss": 0.3}, step)
+
+    assert logger.pbar.set_postfix.call_count == 3  # Called at steps 0, 2, 4
