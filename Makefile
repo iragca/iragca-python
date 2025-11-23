@@ -49,6 +49,15 @@ test:
 docs:
 	uv run mkdocs serve -f docs/mkdocs.yml -a localhost:7000
 
+## Build and publish the package
+.PHONY: publish
+publish:
+	set -a
+	source .env
+	set +a
+	uv build --no-sources
+	uv publish
+
 
 ## Set up Python interpreter environment
 .PHONY: create_environment
