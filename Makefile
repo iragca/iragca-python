@@ -52,6 +52,8 @@ docs:
 ## Build and publish the package
 .PHONY: publish
 publish:
+    make format
+	make test
 	set -a
 	source .env
 	set +a
