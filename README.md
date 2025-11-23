@@ -4,6 +4,7 @@ My library of custom python scripts and configurations.
 
 Features
 - Custom matplotlib plotting styles and colors
+- A run logger for logging training runs in Machine/Deep learning pipelines
 
 ## Installation
 
