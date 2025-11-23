@@ -112,6 +112,7 @@ def test_repr_nonempty():
 
 def test_progress_bar_updates(monkeypatch):
     mock_pbar = MagicMock()
+    mock_pbar.n = 0
 
     # Patch tqdm inside RunLogger for this test
     monkeypatch.setattr("iragca.ml.runlogger.tqdm", lambda total: mock_pbar)
@@ -121,3 +122,18 @@ def test_progress_bar_updates(monkeypatch):
 
     mock_pbar.update.assert_called_once_with(1)
     mock_pbar.set_postfix.assert_called_once()
+
+
+def test_progress_bar_closes_at_max_steps(monkeypatch):
+    mock_pbar = MagicMock()
+    mock_pbar.n = 9  # One less than max_steps
+
+    # Patch tqdm inside RunLogger for this test
+    monkeypatch.setattr("iragca.ml.runlogger.tqdm", lambda total: mock_pbar)
+
+    logger = RunLogger(max_steps=10, display_progress=True)
+    logger.log_metrics({"loss": 0.2}, 9)  # Log at the last step
+
+    mock_pbar.update.assert_called_once_with(1)
+    mock_pbar.set_postfix.assert_called_once()
+    mock_pbar.close.assert_called_once()

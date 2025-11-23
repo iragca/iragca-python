@@ -37,10 +37,10 @@ class RunLogger:
             If True, a tqdm progress bar is shown during logging.
         """
         self.history = {}
-        self.display_progress = display_progress
+        self._display_progress = display_progress
         self._max_steps = max_steps
 
-        if self.display_progress:
+        if self._display_progress:
             self.pbar = tqdm(total=max_steps)
 
     def log_metrics(self, log_data: dict, step: int):
@@ -72,10 +72,16 @@ class RunLogger:
             if not hasattr(self, key):
                 self.add_metric_property(key)
 
+        if not self._display_progress:
+            return
+
         # update progress bar
-        if self.display_progress:
-            self.pbar.update(1)
-            self.pbar.set_postfix(log_data, refresh=True)
+        self.pbar.update(1)
+        self.pbar.set_postfix(log_data, refresh=True)
+
+        if self.pbar.n == self._max_steps - 1:
+            self.pbar.close()
+            self._display_progress = False
 
     def add_metric_property(self, metric_name: str):
         """
