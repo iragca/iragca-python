@@ -79,7 +79,7 @@ class RunLogger:
         self.pbar.update(1)
         self.pbar.set_postfix(log_data, refresh=True)
 
-        if self.pbar.n == self._max_steps - 1:
+        if self.pbar.n == self._max_steps:
             self.pbar.close()
             self._display_progress = False
 
