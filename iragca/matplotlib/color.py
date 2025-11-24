@@ -22,6 +22,12 @@ class Color(Enum):
     WHITE = "#ffffff"
     GREEN = "#14802d"
 
+    # Additional
+    MOSS = "#b9ac70"
+    BRONZE = "#a96b59"
+    METAL = "#717581"
+    EGG_BLUE = "#92dadd"
+
     # Accents
     DARK_GRAY = "#3b3b3b"
     LIGHT_GRAY = "#BFBFBF"
