@@ -34,6 +34,7 @@ class RunLogger:
         max_steps: int = Field(..., ge=1),
         display_progress: bool = Field(False),
         update_interval: int = Field(1, ge=1),
+        **kwargs,
     ):
         """
         Parameters
@@ -44,14 +45,17 @@ class RunLogger:
             If True, a tqdm progress bar is shown during logging.
         update_interval : int, optional
             Frequency (in steps) to update the progress bar. Default is 1 (update every step).
+        kwargs : dict
+            Key word arguments for `tqdm.tqdm`
         """
         self.history = {}
         self._display_progress = display_progress
         self._max_steps = max_steps
+        self._kwargs = kwargs
 
         if self._display_progress:
             self._update_interval = update_interval
-            self.pbar = tqdm(total=max_steps)
+            self.pbar = tqdm(total=max_steps, **self._kwargs)
 
     def log_metrics(self, log_data: dict, step: int):
         """
