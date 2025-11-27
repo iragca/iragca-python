@@ -36,7 +36,7 @@ class RunLogger:
         display_progress: bool = Field(False),
         update_interval: int = Field(1, ge=1),
         notebook: bool = Field(False),
-        **kwargs,
+        tqdm_kwargs: dict = Field({}),
     ):
         """
         Parameters
@@ -49,21 +49,21 @@ class RunLogger:
             Frequency (in steps) to update the progress bar. Default is 1 (update every step).
         notebook : bool, optional
             Whether to use `tqdm.notebook.tqdm` or `tqdm.tqdm`.
-        kwargs : dict
+        tqdm_kwargs : dict
             Key word arguments for `tqdm.tqdm`
         """
         self.history = {}
         self._display_progress = display_progress
         self._max_steps = max_steps
-        self._kwargs = kwargs
+        self.tqdm_kwargs = tqdm_kwargs
         self._notebook = notebook
 
         if self._display_progress:
             self._update_interval = update_interval
             self.pbar = (
-                nbtqdm(total=max_steps, **self._kwargs)
+                nbtqdm(total=max_steps, **self.tqdm_kwargs)
                 if notebook
-                else tqdm(total=max_steps, **self._kwargs)
+                else tqdm(total=max_steps, **self.tqdm_kwargs)
             )
 
     def log_metrics(self, log_data: dict, step: int):
