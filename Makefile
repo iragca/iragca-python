@@ -49,13 +49,20 @@ test:
 docs:
 	uv run mkdocs serve -f docs/mkdocs.yml -a localhost:7000
 
-## Build and publish the patch
-.PHONY: publish-patch
-publish-patch:
+
+## Build patch version
+.PHONY: build-patch
+build-patch:
 	@uv version --bump patch
 	@git add .
 	@git commit -m "chore: publish patch version"
 	@git push origin master
+
+
+## Build and publish the patch
+.PHONY: publish-patch
+publish-patch:
+	@make build-patch
 	@bash -c ' \
 		set -a; \
 		source .env; \
