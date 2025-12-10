@@ -42,5 +42,6 @@ dev = [
 ]
 
 [project.optional-dependencies]
+functional = ["functional"]
 matplotlib = ["matplotlib"]
 ml = ["tqdm"]
