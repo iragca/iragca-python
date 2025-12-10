@@ -151,7 +151,7 @@ class Pipeline:
         self.steps.append(step)
         return self
 
-    def __repr__(self) -> str:
+    def __str__(self) -> str:
         """
         Return a string representation of the pipeline with visual arrows.
 
@@ -164,4 +164,6 @@ class Pipeline:
         arrows = "\n    ⬇\n".join(f"{indent}{repr(step)}" for step in self.steps)
         return f"Pipeline(\n{arrows}\n)"
 
-    __str__ = __repr__
+    def __repr__(self) -> str:
+        num_steps = len(self.steps)
+        return f"<Pipeline({num_steps} steps)>"
