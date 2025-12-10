@@ -149,3 +149,27 @@ def test_update_interval():
         logger.log_metrics({"loss": 0.3}, step)
 
     assert logger.pbar.set_postfix.call_count == 3  # Called at steps 0, 2, 4
+
+
+def test_create_from_dict():
+    data = {
+        "step": [0, 1],
+        "loss": [1.0, 0.8],
+        "acc": [0.5, 0.6],
+    }
+    logger = RunLogger.from_dict(data)
+
+    assert logger.loss == [1.0, 0.8]
+    assert logger.acc == [0.5, 0.6]
+    assert logger.steps == [0, 1]
+
+
+def test_metrics_property():
+    logger = RunLogger(max_steps=10)
+
+    logger.log_metrics({"loss": 1.0, "acc": 0.5}, step=0)
+    logger.log_metrics({"loss": 0.8, "acc": 0.6}, step=1)
+    
+    assert "loss" in logger.metrics
+    assert "acc" in logger.metrics
+    assert len(logger.metrics) == 2

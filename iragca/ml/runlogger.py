@@ -209,3 +209,50 @@ class RunLogger:
         first_step = steps[0]
         metrics = list(self.history[first_step].keys())
         return f"<RunLogger: steps={len(steps)}, metrics={metrics}>"
+
+    @classmethod
+    def from_dict(cls, logs: dict) -> "RunLogger":
+        """
+        Create a RunLogger instance from existing logs or dictionary.
+
+        Parameters
+        ----------
+        logs : dict
+            Dictionary of the form::
+
+                {
+                    "step": [...],
+                    "metric_name_1": [...],
+                    "metric_name_2": [...],
+                    ...
+                }
+
+        Returns
+        -------
+        RunLogger
+            Instance populated with the provided logs.
+
+        Notes
+        -----
+        This is the inverse of the `get_logs` method.
+        'step' key is required in the input dictionary.
+        """
+        max_steps = len(logs.get("step", []))
+        logger = cls(max_steps=max_steps)
+
+        for i, step in enumerate(logs.get("step", [])):
+            log_data = {key: logs[key][i] for key in logs.keys() if key != "step"}
+            logger.log_metrics(log_data, step)
+
+        return logger
+
+    @property
+    def metrics(self) -> list[str]:
+        """
+        List[str]
+            List of all logged metric names.
+        """
+        if not self.history:
+            return []
+        first_step = sorted(self.history.keys())[0]
+        return list(self.history[first_step].keys())
