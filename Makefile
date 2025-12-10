@@ -59,10 +59,18 @@ build-patch:
 	@git push origin master
 
 
-## Build and publish the patch
-.PHONY: publish-patch
-publish-patch:
-	@make build-patch
+## Build minor version
+.PHONY: build-minor
+build-minor:
+	@uv version --bump minor
+	@git add .
+	@git commit -m "chore: publish minor version"
+	@git push origin master
+
+
+## Publish
+.PHONY: publish
+publish:
 	@bash -c ' \
 		set -a; \
 		source .env; \
@@ -70,6 +78,13 @@ publish-patch:
 		uv build --no-sources; \
 		uv publish; \
 	'
+
+
+## Build and publish the patch
+.PHONY: publish-patch
+publish-patch:
+	@make build-patch
+	@make publish
 
 
 ## Set up Python interpreter environment
