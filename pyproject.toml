@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "iragca"
-version = "0.3.1"
+version = "0.4.0"
 description = "My custom scripts"
 authors = [{ name = "Chris Irag", email = "iragca@pm.me" }]
 
