@@ -9,7 +9,7 @@
 <a href="https://github.com/iragca/iragca-python">
 <img alt="License" src="https://img.shields.io/badge/license-MIT-green.svg"/>
 </a>
-<a href="https://pypi.org/project/iragca/">
+<a href="https://github.com/iragca/iragca-python/releases">
 <img alt="Release" src="https://img.shields.io/github/v/release/iragca/iragca-python"/>
 </a>
 <a href="https://pypi.org/project/iragca/">
