@@ -1,6 +1,27 @@
 <h1 align="center">iragca</h1>
 
-My library of custom python scripts and configurations.
+<h3 align="center">My library of custom python scripts and configurations</h3>
+
+---
+
+<p align="center">
+
+<a href="https://github.com/iragca/iragca-python">
+<img alt="License" src="https://img.shields.io/badge/license-MIT-green.svg"/>
+</a>
+<a href="https://pypi.org/project/iragca/">
+<img alt="Release" src="https://img.shields.io/github/v/release/iragca/iragca-python"/>
+</a>
+<a href="https://pypi.org/project/iragca/">
+<img alt="PyPI" src="https://img.shields.io/badge/pypi-iragca-python?logo=pypi"/>
+</a>
+<a href="https://www.python.org/downloads/">
+<img alt="Python Version" src="https://img.shields.io/badge/python-3.10+-blue.svg?logo=python"/>
+</a>
+
+</p>
+
+---
 
 Features
 - Custom matplotlib plotting styles and colors
