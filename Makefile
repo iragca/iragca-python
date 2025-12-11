@@ -54,18 +54,26 @@ docs:
 .PHONY: build-patch
 build-patch:
 	@uv version --bump patch
-	@git add .
-	@git commit -m "chore: publish patch version"
-	@git push origin master
-
+	@VERSION=$(shell uv version --short); \
+	git add pyproject.toml; \
+	git add uv.lock; \
+	git commit -m "chore: publish patch v$$VERSION"; \
+	git tag v$$VERSION; \
+	git push; \
+	git push origin v$$VERSION
 
 ## Build minor version
 .PHONY: build-minor
 build-minor:
 	@uv version --bump minor
-	@git add .
-	@git commit -m "chore: publish minor version"
-	@git push origin master
+	@VERSION=$(shell uv version --short); \
+	git add pyproject.toml; \
+	git add uv.lock; \
+	git commit -m "chore: publish minor v$$VERSION"; \
+	git tag v$$VERSION; \
+	git push; \
+	git push origin v$$VERSION
+
 
 
 ## Publish
