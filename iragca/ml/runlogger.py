@@ -8,6 +8,7 @@ class RunLogger:
     A lightweight logger for tracking scalar metrics across sequential steps.
 
     This class provides:
+
     - Metric logging for arbitrary named metrics.
     - Dynamic attribute access, e.g., `logger.loss` → list of all logged loss values.
     - Optional tqdm progress bar display, with support for both console and Jupyter Notebook environments.
