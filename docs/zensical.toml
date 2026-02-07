@@ -11,7 +11,7 @@
 # The site_name is shown in the page header and the browser window title
 #
 # Read more: https://zensical.org/docs/setup/basics/#site_name
-site_name = "Documentation"
+site_name = "iragca-python"
 
 # The site_description is included in the HTML head and should contain a
 # meaningful description of the site content for use by search engines.
@@ -48,9 +48,15 @@ Copyright &copy; 2026 Chris Irag
 # Read more: https://zensical.org/docs/setup/navigation/
 nav = [
     { "Home" = "index.md" },
+    { "Examples" = "examples.md" },
     { "API Reference" = [
         "api-reference/index.md",
-        { "Run Logger" = "api-reference/RunLogger.md" },
+        { "Functional" = "api-reference/functional.md" },
+        { "Matplotlib" = "api-reference/matplotlib.md" },
+        { "ML" = [
+            { "Run Logger" = "api-reference/run-logger.md" },
+        ] },
+        { "Warnings" = "api-reference/warnings.md" },
     ] },
 ]
 

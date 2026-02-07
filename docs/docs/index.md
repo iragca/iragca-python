@@ -1,44 +1,70 @@
-# Home
-
-My library of custom python scripts and configurations.
-
+---
+hide:
+  - navigation
 ---
 
-## Features
+# iragca-python Documentation
 
-- Custom matplotlib plotting styles and colors
-- A run logger for logging training runs in Machine/Deep learning pipelines
+Welcome to the iragca-python documentation!
+
+`iragca-python` is a comprehensive Python library providing practical utilities for data science, machine learning, and visualization workflows. Designed to streamline common tasks in machine learning, data visualization, and functional programming.
+
+## Key Features
+
+<div class="grid cards" markdown>
+
+-   :lucide-chart-network:{ .lg .middle } __Accessible Visualization__
+
+    ---
+
+    Professional matplotlib styles and WCAG-compliant color palettes designed for clarity and accessibility. Create beautiful, inclusive data visualizations without the hassle of manual styling.
+
+    [:octicons-arrow-right-24: matplotlib module](./api-reference/matplotlib.md)
+
+-   :lucide-clipboard-clock:{ .lg .middle } __Lightweight Experiment Tracking__
+
+    ---
+
+    `RunLogger` provides a minimalist approach to tracking metrics during training. Log metrics with dynamic property access, optional progress bars, and easy export/import functionality.
+
+    [:octicons-arrow-right-24: logger module](./api-reference/run-logger.md)
+
+-   :lucide-square-function:{ .lg .middle } __Functional Programming Utilities__
+
+    ---
+
+    Build composable, readable data transformation pipelines using `Pipeline` and `Step` classes. Perfect for ETL workflows and data processing chains.
+
+    [:octicons-arrow-right-24: functional module](./api-reference/functional.md)
+
+-   :lucide-message-square-warning:{ .lg .middle } __Deprecation Management__
+
+    ---
+
+    Professional deprecation handling tools to maintain clean APIs and guide users toward better alternatives.
+
+    [:octicons-arrow-right-24: warnings module](./api-reference/warnings.md)
+
+</div>
+
+## Use Cases
+
+- **ML/DL Training**: Track metrics with `RunLogger` during training loops
+- **Data Pipelines**: Build readable transformation chains with `Pipeline`
+- **Publication Plots**: Create accessible visualizations with pre-configured styles
+- **Library Maintenance**: Manage deprecations gracefully with proper warnings
 
 ## Installation
 
-To install using [pip](https://pypi.org/project/pip/), run:
+Install using [pip](https://pypi.org/project/pip/):
 
 ```bash
 pip install iragca
 ```
 
-Only install the matplotlib scripts
+Install a specific module. See the [relevant documentation](./api-reference/index.md#modules) for all available modules.
 
 ```bash
-pip install iragca[matplotlib]
+pip install iragca[functional]
 ```
 
-## Example Usage
-
-```python
-import matplotlib.pyplot as plt
-
-from iragca.matplotlib import Color, Styles
-
-plt.style.use(Styles.CMR10.value)
-
-sample_data = [1, 3, 2, 4, 3, 5]
-
-plt.plot(sample_data, color=Color.BLUE.value)
-plt.title("Sample Plot with Custom Style and Color")
-plt.xlabel("X-axis")
-plt.ylabel("Y-axis")
-plt.show()
-```
-
-<img src="/images/sample_plot.png" width=300>
