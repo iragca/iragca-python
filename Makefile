@@ -50,33 +50,43 @@ docs:
 	uv run zensical serve -f docs/zensical.toml -a localhost:7000
 
 
-## Build patch version
-.PHONY: build-patch
-build-patch:
+## Bump project version with patch update
+.PHONY: patch
+patch:
 	@uv version --bump patch
-	@VERSION=$(shell uv version --short); \
-	git add pyproject.toml; \
-	git add uv.lock; \
-	git commit -m "chore: publish patch v$$VERSION"; \
-	git tag v$$VERSION; \
-	git push; \
-	git push origin v$$VERSION
+	@git add pyproject.toml
+	@git add uv.lock
+	@git commit -m "🏷️ release (patch): $$(uv version --short)"
+	@git tag $$(uv version --short)
 
-## Build minor version
-.PHONY: build-minor
-build-minor:
+
+## Bump project version with minor update
+.PHONY: minor
+minor:
 	@uv version --bump minor
-	@VERSION=$(shell uv version --short); \
-	git add pyproject.toml; \
-	git add uv.lock; \
-	git commit -m "chore: publish minor v$$VERSION"; \
-	git tag v$$VERSION; \
-	git push; \
-	git push origin v$$VERSION
+	@git add pyproject.toml
+	@git add uv.lock
+	@git commit -m "🏷️ release (minor): $$(uv version --short)"
+	@git tag $$(uv version --short)
 
 
+## Bump project version with major update
+.PHONY: major
+major:
+	@uv version --bump major
+	@git add pyproject.toml
+	@git add uv.lock
+	@git commit -m "🏷️ release (major): $$(uv version --short)"
+	@git tag $$(uv version --short)
 
-## Publish
+
+## Push committed release tag to origin to trigger GitHub release
+.PHONY: release
+release:
+	@git push origin $$(uv version --short)
+
+
+## Publish to PyPI
 .PHONY: publish
 publish:
 	@bash -c ' \
@@ -88,10 +98,11 @@ publish:
 	'
 
 
-## Build and publish the patch
+## Release and publish the patch
 .PHONY: publish-patch
 publish-patch:
-	@make build-patch
+	@make patch
+	@make release
 	@make publish
 
 
