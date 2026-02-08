@@ -23,22 +23,52 @@
 
 ---
 
-Features
-- Custom matplotlib plotting styles and colors
-- A run logger for logging training runs in Machine/Deep learning pipelines
+`iragca-python` is a comprehensive Python library providing practical utilities for data science, machine learning, and visualization workflows. It streamlines common tasks in machine learning, data visualization, and functional programming.
+
+## Key Features
+
+- **Accessible Visualization**: Professional matplotlib styles and WCAG-compliant color palettes designed for clarity and accessibility.
+- **Lightweight Experiment Tracking**: `RunLogger` for logging metrics with dynamic property access and optional progress bars.
+- **Functional Programming Utilities**: Composable data transformation pipelines using `Pipeline` and `Step`.
+- **Deprecation Management**: Tools to manage deprecations and guide users to alternatives.
+
+## Use Cases
+
+- **ML/DL Training**: Track metrics with `RunLogger` during training loops
+- **Data Pipelines**: Build readable transformation chains with `Pipeline`
+- **Publication Plots**: Create accessible visualizations with pre-configured styles
+- **Library Maintenance**: Manage deprecations gracefully with proper warnings
 
 ## Installation
 
-To install using [pip](https://pypi.org/project/pip/), run:
+Install using [pip](https://pypi.org/project/pip/):
 
 ```bash
 pip install iragca
-
-# Only install the matplotlib scripts
-pip install iragca[matplotlib]
 ```
 
-## Quick example
+Install a specific module (see the [docs](https://iragca.github.io/iragca-python/api-reference/) for options):
+
+```bash
+pip install iragca[functional]
+```
+
+## Quick Start
+
+### RunLogger
+
+```python
+from iragca.ml import RunLogger
+
+logger = RunLogger(max_steps=100, display_progress=True)
+for epoch in range(100):
+	loss = 1.0 / (epoch + 1)
+	logger.log_metrics({'loss': loss}, step=epoch)
+
+print(f"Final loss: {logger.loss[-1]}")
+```
+
+### Matplotlib Colors and Styles
 
 ```python
 import matplotlib.pyplot as plt
@@ -57,3 +87,21 @@ plt.show()
 ```
 
 <img src="docs/docs/images/sample_plot.png" width=300>
+
+### Functional Pipelines
+
+```python
+from iragca.functional import Pipeline, Step
+
+pipeline = Pipeline([
+	lambda x: x * 2,
+	Step(lambda x, n: x + n, n=10),
+	lambda x: x ** 2,
+])
+
+result = pipeline(5)  # (5 * 2 + 10)^2 = 400
+```
+
+## Documentation
+
+Read the full documentation in the [docs](docs/docs/index.md) or visit the [API reference](docs/docs/api-reference/index.md).
