@@ -104,4 +104,4 @@ result = pipeline(5)  # (5 * 2 + 10)^2 = 400
 
 ## Documentation
 
-Read the full documentation in the [docs](docs/docs/index.md) or visit the [API reference](docs/docs/api-reference/index.md).
+Read the full documentation in the [docs](https://iragca.github.io/iragca-python/) or visit the [API reference](https://iragca.github.io/iragca-python/api-reference/).
