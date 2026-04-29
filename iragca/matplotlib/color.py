@@ -78,6 +78,13 @@ class Color(str, Enum):
         return pallete
 
     @classmethod
+    def Custom(
+        cls, colors: list["Color"], name: str = "Custom"
+    ) -> mcolors.LinearSegmentedColormap:
+        """Get a custom color palette."""
+        return mcolors.LinearSegmentedColormap.from_list(name, colors, N=256)
+
+    @classmethod
     def BlWhOr(cls) -> mcolors.LinearSegmentedColormap:
         """Get a color palette for B/W."""
         pallete: list = [
