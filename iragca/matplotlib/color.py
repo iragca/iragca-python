@@ -104,7 +104,7 @@ class Color(str, Enum):
             cls.WHITE.value,
             cls.BLUE.value,
         ]
-        return mcolors.LinearSegmentedColormap.from_list("BlWhOr", palette, N=256)
+        return mcolors.LinearSegmentedColormap.from_list("WhBl", palette, N=256)
 
     @classmethod
     def WhRd(cls) -> mcolors.LinearSegmentedColormap:
