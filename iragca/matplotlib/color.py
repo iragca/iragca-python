@@ -5,7 +5,7 @@ from enum import Enum
 import matplotlib.colors as mcolors
 
 
-class Color(Enum):
+class Color(str, Enum):
     """Enum for colors used in the project.
 
     Primary colors are inspired by the accessible color palette from
