@@ -72,13 +72,13 @@ class Color(str, Enum):
         ]
 
     @classmethod
-    def get_all_colors(cls: type) -> list:
+    def get_all_colors(cls) -> list:
         """Get all colors as a list."""
-        pallete = cls.get_primary_colors() + cls.get_secondary_colors()
+        pallete = cls.get_main_colors() + cls.get_accent_colors()
         return pallete
 
     @classmethod
-    def BlWhOr(cls: type) -> mcolors.LinearSegmentedColormap:
+    def BlWhOr(cls) -> mcolors.LinearSegmentedColormap:
         """Get a color palette for B/W."""
         pallete: list = [
             cls.BLUE.value,
@@ -88,7 +88,7 @@ class Color(str, Enum):
         return mcolors.LinearSegmentedColormap.from_list("BlWhOr", pallete, N=256)
 
     @classmethod
-    def BlWhRd(cls: type) -> mcolors.LinearSegmentedColormap:
+    def BlWhRd(cls) -> mcolors.LinearSegmentedColormap:
         """Get a color palette for B/W."""
         pallete: list = [
             cls.BLUE.value,
@@ -98,7 +98,7 @@ class Color(str, Enum):
         return mcolors.LinearSegmentedColormap.from_list("BlWhRd", pallete, N=256)
 
     @classmethod
-    def WhBl(cls: type) -> mcolors.LinearSegmentedColormap:
+    def WhBl(cls) -> mcolors.LinearSegmentedColormap:
         """Get a color palette for B/W."""
         palette: list = [
             cls.WHITE.value,
@@ -107,7 +107,7 @@ class Color(str, Enum):
         return mcolors.LinearSegmentedColormap.from_list("BlWhOr", palette, N=256)
 
     @classmethod
-    def WhRd(cls: type) -> mcolors.LinearSegmentedColormap:
+    def WhRd(cls) -> mcolors.LinearSegmentedColormap:
         """Get a color palette for W/R."""
         palette: list = [
             cls.WHITE.value,
@@ -116,7 +116,7 @@ class Color(str, Enum):
         return mcolors.LinearSegmentedColormap.from_list("WhRd", palette, N=256)
 
     @classmethod
-    def WhOr(cls: type) -> mcolors.LinearSegmentedColormap:
+    def WhOr(cls) -> mcolors.LinearSegmentedColormap:
         """Get a color palette for W/O."""
         palette: list = [
             cls.WHITE.value,
