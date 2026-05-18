@@ -23,7 +23,7 @@
 
 ---
 
-`iragca-python` is a comprehensive Python library providing practical utilities for data science, machine learning, and visualization workflows. It streamlines common tasks in machine learning, data visualization, and functional programming.
+`iragca` is a comprehensive Python library providing practical utilities for data science, machine learning, and visualization workflows. It streamlines common tasks in machine learning, data visualization, and functional programming.
 
 ## Key Features
 
